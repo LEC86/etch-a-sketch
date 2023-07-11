@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Etch-A-Sketch</h1>
+   
+<p>Change the amount of squares</p>
+    <div class="slidecontainer">
+        <input type="range" min="2" max="100" value="50" class="slider" id="myRange">
+      </div>
+      <p>choose a color</p>
+      <div class="colorAndPrompt">
+        <input type="color" id="color">
+      
+    </div>
+ <button id="reset">RESET</button>
+
+    <div id="container"></div> 
+    <script>
+      
+let boxInput =document.getElementById('myRange').value;    
+let pickColor = document.getElementById('color').value;
+
+
+
+
+function startGrid (){
+
+    let boxInput = document.getElementById('myRange').value;       
+let pixelXPixel = 700 / boxInput
+let gridSize = boxInput * boxInput
+let createDivs
+for (i = 0; i < gridSize; i ++) {
+       createDivs = document.createElement('div');
+       createDivs.setAttribute('style', 'width:'+ pixelXPixel+'px; height:'+ pixelXPixel+'px;') 
+       createDivs.classList.add('box');
+       container.appendChild(createDivs); 
+       createDivs.addEventListener('mouseover', function(event){
+        event.target.style.backgroundColor = pickColor;
+    })
+         
+           }
+              }
+ 
+//-------------reset the board------------------------
+              let reset = document.getElementById('reset');
+reset.addEventListener('click', function(){ 
+
+
+    const list = document.getElementById("container");
+       while (list.hasChildNodes()) {
+      list.removeChild(list.firstChild);
+         }
+
+         startGrid()
+    })
+//----------Change fill color-------------------------
+       const chooseColor = document.querySelector('#color');
+chooseColor.addEventListener('input', function(){ 
+   pickColor = document.getElementById('color').value;
+    console.log(pickColor)
+})
+//-----------change the size of the squares and reset------------------------
+
+let slider = document.getElementById('myRange');
+       slider.addEventListener('input', function(){
+       boxInput = document.getElementById('myRange').value;       
+
+
+       const list = document.getElementById("container");
+       while (list.hasChildNodes()) {
+      list.removeChild(list.firstChild);
+         }
+        
+         startGrid()
+
+    })
+//----------------------------------
+startGrid()
+
+
+    </script>
+</body>
+</html>
